@@ -1,17 +1,12 @@
 import java.util.Random;
 
-public class Weapon
+public abstract class Weapon
 {
-
     private String name;
     private int strength;
     private int durability;
+    protected WeaponType type;
 
-    /*TODO add no argument constructor constructor*/
-    /*TODO add three argument constructor*/
-    /*TODO create an attack method that returns a random value from 1 to weapon's strength and deducts 1 from durability*/
-    /*TODO in the attack method if durability is 0 return 0*/
-    /*TODO create a toString override*/
     public Weapon() {
         this.name = "Master Sword";
         this.strength = 5;
@@ -23,7 +18,7 @@ public class Weapon
         this.strength = strength;
         this.durability = durability;
     }
-
+/*
     public int getDamage() {
         if (this.durability > 0) {
             Random r1 = new Random();
@@ -40,10 +35,22 @@ public class Weapon
             this.durability = 0;
             return 0;
         }
-    }
+    }*/
+
+    public abstract int normalAttack();
+
+    public abstract int specialAttack();
 
     public int getDurability() {
         return this.durability;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void reduceDurability(double cost) {
+        this.durability -= cost;
     }
 
     @Override
@@ -52,5 +59,122 @@ public class Weapon
     }
 }
 
+class Melee extends Weapon {
 
-/*TODO Add one creative element all your own*/
+    private int meleeCost = 1;
+    private int meleeSpecialCost = 4;
+
+    public Melee(String name, int strength, int durability) {
+        super(name, strength, durability);
+        this.type = WeaponType.Melee;
+
+    }
+
+    @Override
+    public int normalAttack() {
+        if (this.getDurability() > 0) {
+            Random r1 = new Random();
+            this.reduceDurability(meleeCost);
+            return 1 + r1.nextInt(this.getStrength()-1);
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public int specialAttack() {
+        if (this.getDurability() > 0) {
+            Random r1 = new Random();
+            this.reduceDurability(meleeSpecialCost);
+            return this.getStrength() * 2;
+        } else {
+            return 0;
+        }
+    }
+}
+
+class Ranged extends Weapon {
+
+    private int rangedCost = 1;
+    private int rangedSpecialCost = 4;
+
+    public Ranged(String name, int strength, int durability) {
+        super(name, strength, durability);
+        this.type = WeaponType.Ranged;
+    }
+
+    @Override
+    public int normalAttack() {
+        if (this.getDurability() > 0) {
+            Random r1 = new Random();
+            this.reduceDurability(rangedCost);
+            return 1 + r1.nextInt(this.getStrength()-1);
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public int specialAttack() {
+        if (this.getDurability() > 0) {
+            Random r1 = new Random();
+            this.reduceDurability(rangedSpecialCost);
+            return r1.nextInt(this.getStrength()*3);
+        } else {
+            return 0;
+        }
+    }
+
+}
+
+class Magic extends Weapon {
+
+    private double magicCost = 0.5;
+    private double magicSpecialCost = 0.5;
+
+    private int manaCost = 1;
+    private int manaSpecialCost = 4;
+
+    public Magic(String name, int strength, int durability) {
+        super(name, strength, durability);
+        this.type = WeaponType.Magic;
+    }
+
+    //TODO: Need to setup mana in Character first, including getMana() and setMana().
+/*
+    private int getCharacterMana(Character p) {
+        return p.getMana();
+    }
+
+    private void reduceMana(Character p, double manaCost) {
+        p.setMana(p.getMana() - manaCost);
+    }
+
+    private void reduceSpecialMana(Character p, double manaSpecialCost) {
+        p.setMana(p.getMana() - manaSpecialCost);
+    }
+
+    @Override
+    public int normalAttack() {
+        if (this.getDurability() > 0) {
+            Random r1 = new Random();
+            this.reduceDurability(magicCost);
+            return 1 + r1.nextInt(this.getStrength()-1);
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public int specialAttack() {
+        if (this.getDurability() > 0) {
+            Random r1 = new Random();
+            this.reduceDurability(magicSpecialCost);
+            return this.getStrength() * 2;
+        } else {
+            return 0;
+        }
+    }
+
+    */
+}
