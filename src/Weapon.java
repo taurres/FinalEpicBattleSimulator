@@ -1,7 +1,6 @@
 import java.util.Random;
 
-public abstract class Weapon
-{
+public abstract class Weapon {
     private String name;
     private int strength;
     private int durability;
@@ -75,7 +74,7 @@ class Melee extends Weapon {
         if (this.getDurability() > 0) {
             Random r1 = new Random();
             this.reduceDurability(meleeCost);
-            return 1 + r1.nextInt(this.getStrength()-1);
+            return 1 + r1.nextInt(this.getStrength() - 1);
         } else {
             return 0;
         }
@@ -108,7 +107,7 @@ class Ranged extends Weapon {
         if (this.getDurability() > 0) {
             Random r1 = new Random();
             this.reduceDurability(rangedCost);
-            return 1 + r1.nextInt(this.getStrength()-1);
+            return 1 + r1.nextInt(this.getStrength() - 1);
         } else {
             return 0;
         }
@@ -119,7 +118,7 @@ class Ranged extends Weapon {
         if (this.getDurability() > 0) {
             Random r1 = new Random();
             this.reduceDurability(rangedSpecialCost);
-            return r1.nextInt(this.getStrength()*3);
+            return r1.nextInt(this.getStrength() * 3);
         } else {
             return 0;
         }
@@ -135,31 +134,43 @@ class Magic extends Weapon {
     private int manaCost = 1;
     private int manaSpecialCost = 4;
 
+    private Character owner;
+
     public Magic(String name, int strength, int durability) {
         super(name, strength, durability);
         this.type = WeaponType.Magic;
     }
 
+    public void connectWithOwner(Character p) {
+        this.owner = p;
+    }
+
     //TODO: Need to setup mana in Character first, including getMana() and setMana().
-/*
-    private int getCharacterMana(Character p) {
-        return p.getMana();
+
+    private int getOwnerMana() {
+        return this.owner.getMana();
     }
 
-    private void reduceMana(Character p, double manaCost) {
-        p.setMana(p.getMana() - manaCost);
+    private void reduceMana(double cost) {
+        if (this.owner.getMana() > 0) {
+            this.owner.setMana(this.owner.getMana() - cost);
+        } else {
+            this.owner.setMana(0);
+        }
     }
 
-    private void reduceSpecialMana(Character p, double manaSpecialCost) {
-        p.setMana(p.getMana() - manaSpecialCost);
-    }
 
     @Override
     public int normalAttack() {
         if (this.getDurability() > 0) {
-            Random r1 = new Random();
-            this.reduceDurability(magicCost);
-            return 1 + r1.nextInt(this.getStrength()-1);
+            if (getOwnerMana() > 0) {
+                Random r1 = new Random();
+                this.reduceDurability(magicCost);
+                this.reduceMana(manaCost);
+                return 1 + r1.nextInt(this.getStrength() - 1);
+            } else {
+                return 0;
+            }
         } else {
             return 0;
         }
@@ -168,13 +179,18 @@ class Magic extends Weapon {
     @Override
     public int specialAttack() {
         if (this.getDurability() > 0) {
-            Random r1 = new Random();
-            this.reduceDurability(magicSpecialCost);
-            return this.getStrength() * 2;
+            if (getOwnerMana() > 0) {
+                Random r1 = new Random();
+                this.reduceDurability(magicSpecialCost);
+                this.reduceMana(manaSpecialCost);
+                return this.getStrength() * 2;
+            } else {
+                return 0;
+            }
         } else {
             return 0;
         }
     }
 
-    */
+
 }
