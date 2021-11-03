@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -11,6 +12,10 @@ public class Character
     private int strength;
     private boolean alive;
     private Weapon w1;
+    /**
+     * A character can have more than one abilities
+     */
+    private List<Ability> abilities;
 
     public static int numChars = 0;
 
@@ -95,6 +100,11 @@ public class Character
      * @return value of alive status variable
      */
     public boolean isAlive(){return alive;}
+
+    public void setAlive() {
+        //TODO implement setAlive method
+
+    }
 
     /*TODO Add a toString overload for character and test*/
 }
