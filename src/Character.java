@@ -64,7 +64,7 @@ public class Character {
     public int AttackWithAbility(){
         Random random = new Random();
         //TODO attack with ability
-        return 0;
+        return random.nextInt(strength);
     }
 
     public void speakRandomPhrases(){
@@ -101,7 +101,7 @@ public class Character {
     /**
      * Basic setter for hitPoints
      * Assigns new value to character hitPoints
-     * @param hitPoints
+     * @param hitPoints - hit points of the character
      */
     public void setHitPoints(int hitPoints) {
         if (hitPoints <=0) {
