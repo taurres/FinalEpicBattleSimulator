@@ -101,7 +101,7 @@ public class Character {
     /**
      * Basic setter for hitPoints
      * Assigns new value to character hitPoints
-     * @param hitPoints - hit points of the character
+     * @param hitPoints - the hit points of the character
      */
     public void setHitPoints(int hitPoints) {
         if (hitPoints <=0) {
