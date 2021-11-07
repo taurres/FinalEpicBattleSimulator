@@ -2,31 +2,60 @@
  Battle Arena class object
  Facilitates an epic battle between two character class objects
  */
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class BattleArena
 {
-    private Character c1;
-    private Character c2;
+
+    Character hero1 = new Character("Random rookie", 10, 10);
+    Character hero2 = new Character("Mysterious transfer student ", 20, 15);
+    Character hero3 = new Character("Elf prince",15,50);
+    
+    Character badguy1 = new Character("Zombie Kiki", 10, 30);
+    Character badguy2 = new Character("Slime Coco", 30, 10);
+    Character badguy3 = new Character("Goblin Hehe", 30, 30);
+    
+  
+
+    // creating an ArrayList for heros
+    ArrayList heros = new ArrayList();  
+    heros.add(hero1);
+    heros.add(hero2);
+    heros.add(hero3);
+ // creating an ArrayList for badguys
+    ArrayList badguys = new ArrayList();
+    badguys.add(badguy1);
+    badguys.add(badguy2);
+    badguys.add(badguy3);
+
+
+    Random rand1 = new Random();
+    int index1 = rand1.nextInt(3);
+    Character theHero = (Character) heros.get(index1);
+    
+    Random rand2 = new Random();
+    int index2 = rand1.nextInt(3);
+    Character theBadGuy = (Character) badguys.get(index2);
 
     
-    
-    public BattleArena(Character c1, Character c2)
+    public BattleArena(Character theHero, Character theBadGuy)
     {
-        this.c1=c1;
-        this.c2=c2;
+        this.theHero=theHero;
+        this.theBadGuy=theBadGuy;
     }
 
     /**
      * Epic battle between two characters
      * Method internal to class object
      */
-    public static void fight(Character c1, Character c2)
+    public static void fight(Character theHero, Character theBadGuy)
     {
         System.out.println("Welcome to the Arena!");
-        System.out.println("Today " + c1.getName() + " will battle against " + c2.getName() + "!\n");
-        System.out.println("The hero: " + c1.toString() + ".\n");
-        System.out.println("The bad guy: " + c2.toString() + ".\n");
+        System.out.println("Today " + theHero.getName() + " will battle against " + theBadGuy.getName() + "!\n");
+        System.out.println("The hero " + theHero.toString() + ".\n");
+        System.out.println("The bad guy " + theBadGuy.toString() + ".\n");
         System.out.println("Let the battle begin...");
  
         int damage = 0;
@@ -41,17 +70,17 @@ public class BattleArena
         String selectedWeapon = sc.nextLine(); 
         if(selectedWeapon=="A") {
         	//TODO How to set Weapon?
-        	c1.setWeapon(knuckles);
+        	theHero.setWeapon(knuckles);
         }
         else if(selectedWeapon=="B") {
-        	c1.setWeapon(bow);
+        	theHero.setWeapon(bow);
         }
         else if(selectedWeapon=="C") {
-        	c1.setWeapon(fireBall);
+        	theHero.setWeapon(fireBall);
         }
         
         //Main game loop
-        while(c1.isAlive() && c2.isAlive())
+        while(theHero.isAlive() && theBadGuy.isAlive())
         {
         	Scanner sc1 = new Scanner(System.in); 
             System.out.println("It's your turn!"+ "\n"+"Select: A.attack B.attack with equipped weapon C.special attack with weapon D.ability");
@@ -59,20 +88,20 @@ public class BattleArena
 
             if(selectedAttack=="A") {
             	//TODO create weapon examples in driver(?)
-                damage = c1.attack();
+                damage = theHero.attack();
             }
             else if(selectedAttack=="B") {
-            	damage = c1.attackWithWeapon();
+            	damage = theHero.attackWithWeapon();
             }
             else if(selectedAttack=="C") {
-            	damage = c1.specAttackWithWeapon();
+            	damage = theHero.specAttackWithWeapon();
             }
             else if(selectedAttack=="D") {
-            	 c1.AttackWithAbility();
+            	theHero.AttackWithAbility();
             }
             
-            System.out.println(c1.getName() + " hits " + c2.getName() + " for " + damage);
-            c2.takeDamage(damage);
+            System.out.println(theHero.getName() + " hits " + theBadGuy.getName() + " for " + damage);
+            theBadGuy.takeDamage(damage);
 
             //Pause for 2 seconds to add some suspense
             //This is an example of a checked exception. It won't work without it...
@@ -83,24 +112,24 @@ public class BattleArena
             }
 
             //Don't do damage if 2nd combatant was killed
-            if (c2.isAlive())
+            if (theBadGuy.isAlive())
             {
             	//TODO Need to revise the random phrases method.
-            	c2.speakRandomPhrases();
-                damage = c2.attack();
-                System.out.println(c2.getName() + " hits " + c1.getName() + " for " + damage);
-                c1.takeDamage(damage);
+            	theBadGuy.speakRandomPhrases();
+                damage = theBadGuy.attack();
+                System.out.println(theBadGuy.getName() + " hits " + theHero.getName() + " for " + damage);
+                theHero.takeDamage(damage);
             }
         }
 
         System.out.print("Our winner is : " );
 
         //Report the winner
-        if (c1.isAlive())
-            System.out.println(c1.getName());
+        if (theHero.isAlive())
+            System.out.println(theHero.getName());
         else
-        if (c2.isAlive())
-            System.out.println(c2.getName());
+        if (theBadGuy.isAlive())
+            System.out.println(theBadGuy.getName());
     }
 
 }
