@@ -103,7 +103,14 @@ public class Character {
     public int getStrength(){return strength;}
     public Weapon getWeapon(){return weapon;}
     public int getMana(){return mana;}
-    public void setWeapon(Weapon weapon) {this.weapon = weapon;}
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+        if (weapon instanceof Magic) {
+            ((Magic) weapon).connectWithOwner(this);
+        }
+    }
+
     public void setAlive(boolean alive) {this.alive = alive;}
     public void setAbility(Ability ability){this.ability = ability;}
 
