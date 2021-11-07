@@ -42,7 +42,7 @@ public class Character {
         numChars++;
         alive = true;
         this.name=name;
-        this.hitPoints=hitPoints
+        this.hitPoints=hitPoints;
         this.strength=strength;
         this.weapon = weapon;
         this.ability = ability;
