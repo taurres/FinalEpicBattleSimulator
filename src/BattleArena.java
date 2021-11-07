@@ -34,6 +34,7 @@ public class BattleArena
         String selectedWeapon = sc.nextLine(); 
         if(selectedWeapon=="A") {
         	//TODO How to set Weapon?
+            // TODO: I think we need to create Weapon instances first?
         	c1.setWeapon(Melee);
         }
         else if(selectedWeapon=="B") {
