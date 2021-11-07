@@ -11,12 +11,13 @@ public class Character {
     private int strength;
     private boolean alive;
     private Weapon weapon;
-    private List<Ability> abilities;  //A character can have more than one ability
+    private Ability ability;
+    private int mana;
     public static int numChars = 0;
 
     /**
      * Construct a character object
-     * Initializing all variables other than alive, Weapon
+     * Initializing all variables other than alive, Weapon, Ability
      * Set alive to be true
      * @param name - characters name
      * @param hitPoints - initial set of hitPoints for our character
@@ -37,13 +38,14 @@ public class Character {
      * @param hitPoints - initial set of hitPoints for our character
      * @param strength - initial strength of our character.
      */
-    public Character(String name, int hitPoints, int strength, Weapon weapon) {
+    public Character(String name, int hitPoints, int strength, Weapon weapon, Ability ability) {
         numChars++;
         alive = true;
         this.name=name;
-        this.hitPoints=hitPoints;
+        this.hitPoints=hitPoints
         this.strength=strength;
         this.weapon = weapon;
+        this.ability = ability;
     }
 
     public int attack() {
@@ -61,14 +63,18 @@ public class Character {
         return random.nextInt(strength) + weapon.specialAttack();
     }
 
-    public int AttackWithAbility(){
-        Random random = new Random();
-        //TODO attack with ability
-        return random.nextInt(strength);
+    public void AttackWithAbility(){
+        this.ability.executeAbility();
     }
 
     public void speakRandomPhrases(){
-        System.out.println("You are a bad guy!");
+        Random random = new Random();
+        int index = random.nextInt(3)+1;
+        switch(index){
+            case 1: System.out.println("You are a bad guy");
+            case 2: System.out.println("Oops!");
+            case 3: System.out.println("I will kill you!");
+        }
     }
 
     public void takeDamage(int damage) {
@@ -86,7 +92,8 @@ public class Character {
 
     @Override
     public String toString() {
-        return "name : " + name + "\nHit Points : " +  hitPoints + "\nStrength : " + strength
+        return "name : " + name + "\nHit Points : " +  hitPoints + "\nMana : " + mana
+                + "\nStrength : " + strength
                 + "\nis alive : " + alive + "\nWeapon : " + weapon;
     }
 
@@ -95,8 +102,11 @@ public class Character {
     public int getHitPoints(){return hitPoints;}
     public int getStrength(){return strength;}
     public Weapon getWeapon(){return weapon;}
+    public int getMana(){return mana;}
     public void setWeapon(Weapon weapon) {this.weapon = weapon;}
     public void setAlive(boolean alive) {this.alive = alive;}
+    public void setAbility(Ability ability){this.ability = ability;}
+
 
     /**
      * Basic setter for hitPoints
@@ -109,6 +119,19 @@ public class Character {
             alive = false;
         } else {
             this.hitPoints=hitPoints;
+        }
+    }
+
+    /**
+     * Basic setter for mana
+     * Assigns new value to character mana
+     * @param mana - the mana of the character
+     */
+    public void setMana(int mana) {
+        if (mana <=0) {
+            this.mana = 0;
+        } else {
+            this.mana = mana;
         }
     }
 }
