@@ -25,8 +25,8 @@ public class BattleArena
     {
         System.out.println("Welcome to the Arena!");
         System.out.println("Today " + c1.getName() + " will battle against " + c2.getName() + "!\n");
-        System.out.println("The hero " + c1.toString() + ".\n");
-        System.out.println("The bad guy " + c2.toString() + ".\n");
+        System.out.println("The hero: " + c1.toString() + ".\n");
+        System.out.println("The bad guy: " + c2.toString() + ".\n");
         System.out.println("Let the battle begin...");
  
         int damage = 0;
@@ -68,7 +68,7 @@ public class BattleArena
             	damage = c1.specAttackWithWeapon();
             }
             else if(selectedAttack=="D") {
-            	damage = c1.AttackWithAbility();
+            	 c1.AttackWithAbility();
             }
             
             System.out.println(c1.getName() + " hits " + c2.getName() + " for " + damage);
