@@ -9,6 +9,8 @@ public class BattleArena
     private Character c1;
     private Character c2;
 
+    
+    
     public BattleArena(Character c1, Character c2)
     {
         this.c1=c1;
@@ -28,20 +30,24 @@ public class BattleArena
         System.out.println("Let the battle begin...");
  
         int damage = 0;
+        //Redesign the weapons later.
+        Melee knuckles = new Melee("diamond knuckles",10,5);
+        Ranged bow = new Ranged("clockwork bow",4,8);
+        Magic fireBall = new Magic("fireball",6,99);
         
         Scanner sc = new Scanner(System.in); 
-        System.out.println("Choose a weapon for your hero: A.Melee/B.Ranged/C.Magic");
+        System.out.println("Choose a weapon for your hero: " + "\n" 
+        +"A.Melee:knuckles"+ "\n"+"B.Ranged:clockwork bow"+ "\n"+"C.Magic:fireball"+"\n");
         String selectedWeapon = sc.nextLine(); 
         if(selectedWeapon=="A") {
         	//TODO How to set Weapon?
-            // TODO: I think we need to create Weapon instances first?
-        	c1.setWeapon(Melee);
+        	c1.setWeapon(knuckles);
         }
         else if(selectedWeapon=="B") {
-        	c1.setWeapon(Ranged);
+        	c1.setWeapon(bow);
         }
         else if(selectedWeapon=="C") {
-        	c1.setWeapon(Magic);
+        	c1.setWeapon(fireBall);
         }
         
         //Main game loop
