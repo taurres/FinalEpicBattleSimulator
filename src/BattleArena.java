@@ -2,6 +2,8 @@
  Battle Arena class object
  Facilitates an epic battle between two character class objects
  */
+import java.util.Scanner;
+
 public class BattleArena
 {
     private Character c1;
@@ -11,9 +13,6 @@ public class BattleArena
     {
         this.c1=c1;
         this.c2=c2;
-
-        /*TODO Make the call to this manual instead of having it run by the constructor*/
-        //fight();
     }
 
     /**
@@ -22,18 +21,50 @@ public class BattleArena
      */
     public static void fight(Character c1, Character c2)
     {
+        System.out.println("Welcome to the Arena!");
+        System.out.println("Today " + c1.getName() + " will battle against " + c2.getName() + "!\n");
+        System.out.println("The hero " + c1.toString() + ".\n");
+        System.out.println("The bad guy " + c2.toString() + ".\n");
+        System.out.println("Let the battle begin...");
+ 
         int damage = 0;
-        //Random r1 = new Random();
-
+        
+        Scanner sc = new Scanner(System.in); 
+        System.out.println("Choose a weapon for your hero: A.Melee/B.Ranged/C.Magic");
+        String selectedWeapon = sc.nextLine(); 
+        if(selectedWeapon=="A") {
+        	//TODO How to set Weapon?
+        	c1.setWeapon(Melee);
+        }
+        else if(selectedWeapon=="B") {
+        	c1.setWeapon(Ranged);
+        }
+        else if(selectedWeapon=="C") {
+        	c1.setWeapon(Magic);
+        }
+        
         //Main game loop
         while(c1.isAlive() && c2.isAlive())
         {
+        	Scanner sc1 = new Scanner(System.in); 
+            System.out.println("It's your turn!"+ "\n"+"Select: A.attack B.attack with equipped weapon C.special attack with weapon D.ability");
+            String selectedAttack = sc1.nextLine(); 
 
-            //damage = r1.nextInt(c1.getStrength());
-
-            damage = c1.attack();
+            if(selectedAttack=="A") {
+            	//TODO create weapon examples in driver(?)
+                damage = c1.attack();
+            }
+            else if(selectedAttack=="B") {
+            	damage = c1.attackWithWeapon();
+            }
+            else if(selectedAttack=="C") {
+            	damage = c1.specAttackWithWeapon();
+            }
+            else if(selectedAttack=="D") {
+            	damage = c1.AttackWithAbility();
+            }
+            
             System.out.println(c1.getName() + " hits " + c2.getName() + " for " + damage);
-            //c2.setHitPoints(c2.getHitPoints()-damage);
             c2.takeDamage(damage);
 
             //Pause for 2 seconds to add some suspense
@@ -47,10 +78,10 @@ public class BattleArena
             //Don't do damage if 2nd combatant was killed
             if (c2.isAlive())
             {
-                //damage = r1.nextInt(c2.getStrength());
+            	//TODO Need to revise the random phrases method.
+            	c2.speakRandomPhrases();
                 damage = c2.attack();
                 System.out.println(c2.getName() + " hits " + c1.getName() + " for " + damage);
-                //c1.setHitPoints(c1.getHitPoints() - damage);
                 c1.takeDamage(damage);
             }
         }
