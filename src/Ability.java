@@ -1,53 +1,140 @@
 import java.util.Random;
 
 /**
- * We creatively add a Skill element to the hero Character.
- * Player can select a skill for the character each round.
+ * We creatively add an Ability element to the hero Character.
+ * Player can select an Ability for the character each round.
  */
 public abstract class Ability {
 
     protected Character character;
+    protected int durability;
 
     /**
-     * Generic method to execute the specific ability.
-     * @return
+     * Generic constructor for Ability
+     * @param character character to have the ability
      */
-    public abstract int executeAbility();
-}
-
-/**
- * Reborn ability can refresh the hitpoint of a character if the character is dead
- */
-class Reborn extends Ability {
-
-    private int durability;
-
-    public Reborn(Character character) {
+    public Ability(Character character) {
+        this.character = character;
+        character.setAbility(this);
         this.durability = 1;
     }
 
     /**
-     * refresh random hitpoint, at most character's stregth
+     * Generic method to execute the specific ability.
+     * @throws RuntimeException when ability execution failed
      */
-    private void reborn() {
-        if (this.durability > 0) {
-            Random random = new Random();
-            this.durability -= 1;
-            // set hit points based on the character's strength
-            character.setHitPoints(random.nextInt(character.getStrength()));
-            character.setAlive();
-            System.out.printf("%s refresh hitpoint to %d\n", character.getName(), character.getHitPoints());
+    public abstract void executeAbility();
+}
+
+/**
+ * Reborn ability can bring a character back to life if the character is dead,
+ * after reborn, the character will have random hit points at the maximum of its Strength.
+ */
+class Reborn extends Ability {
+
+    /**
+     * Constructor for Reborn ability
+     * @param character character to have the ability
+     */
+    public Reborn(Character character) {
+        super(character);
+    }
+
+    @Override
+    public void executeAbility() {
+        try {
+            reborn();
+            System.out.println("Execute Ability Reborn successfully");
+        } catch (Exception e) {
+            System.out.println("Execute Ability Reborn failed!");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Bring character back to life,
+     * give random hit points, at most character's strength
+     * @throws RuntimeException if character is alive or durability is 0.
+     */
+    private void reborn() throws RuntimeException {
+        if (!this.character.isAlive()) {
+            if (this.durability > 0) {
+                Random random = new Random();
+                this.durability -= 1;
+                // set hit points based on the character's strength
+                character.setHitPoints(random.nextInt(character.getStrength()));
+                character.setAlive(true);
+                System.out.printf("%s refresh hitpoint to %d\n", character.getName(), character.getHitPoints());
+            } else {
+                throw new RuntimeException("Durability is 0.");
+            }
+        } else {
+            throw new RuntimeException("Character is still alive!");
         }
     }
 
     @Override
-    public int executeAbility() {
+    public String toString() {
+        return "Reborn gives you a second chance. Unless you don't need it :D";
+    }
+}
+
+/**
+ * Refresh ability can add a certain amount to a character's hit points and mana.
+ */
+class Refresh extends Ability {
+
+    /**
+     * Hit points amount to be added.
+     */
+    private final int ADD_HIT_POINTS = 1000;
+
+    /**
+     * Mana amount to be added.
+     */
+    private final int ADD_MANA = 500;
+
+    /**
+     * Constructor for Refresh ability
+     * @param character character to have the ability
+     */
+    public Refresh(Character character) {
+        super(character);
+    }
+
+    @Override
+    public void executeAbility() {
         try {
-            reborn();
-            return 0;
+            refresh();
+            System.out.println("Execute Ability Refresh successfully");
         } catch (Exception e) {
+            System.out.println("Execute Ability Refresh failed!");
             e.printStackTrace();
-            return 1;
         }
+    }
+
+    /**
+     * Add a certain amount to the hit points and mana.
+     * @throws RuntimeException if character is dead or durability is 0.
+     */
+    private void refresh() throws RuntimeException {
+        if (character.isAlive()) {
+            if (this.durability > 0) {
+                this.durability -= 1;
+                int curHitPoints = character.getHitPoints();
+                int curMana = character.getMana();
+                character.setHitPoints(curHitPoints + ADD_HIT_POINTS);
+                character.setMana(curMana + ADD_MANA);
+            } else {
+                throw new RuntimeException("Durability is 0.");
+            }
+        } else {
+            throw new RuntimeException("Character is dead!");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Refresh gives you a huge amount of hit points and mana.";
     }
 }
