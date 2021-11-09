@@ -7,13 +7,13 @@ public class GameBattleDriver
 {
     public static void main(String [] args)
     {
-        Character hero1 = new Character("Random rookie", 10, 10);
-        Character hero2 = new Character("Mysterious transfer student ", 20, 15);
-        Character hero3 = new Character("Elf prince",15,50);
+        Character hero1 = new Character("Random rookie", 10, 10, 20);
+        Character hero2 = new Character("Mysterious transfer student ", 20, 15, 10);
+        Character hero3 = new Character("Elf prince",15,50, 5);
         
-        Character badguy1 = new Character("Zombie Kiki", 10, 30);
-        Character badguy2 = new Character("Slime Coco", 30, 10);
-        Character badguy3 = new Character("Goblin Hehe", 30, 30);
+        Character badguy1 = new Character("Zombie Kiki", 10, 30, 20);
+        Character badguy2 = new Character("Slime Coco", 30, 10, 10);
+        Character badguy3 = new Character("Goblin Hehe", 30, 30, 5);
         
       
 
