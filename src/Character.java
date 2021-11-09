@@ -23,12 +23,13 @@ public class Character {
      * @param hitPoints - initial set of hitPoints for our character
      * @param strength - initial strength of our character.
      */
-    public Character(String name, int hitPoints, int strength) {
+    public Character(String name, int hitPoints, int strength, int mana) {
         numChars++;
         alive = true;
         this.name=name;
         this.hitPoints=hitPoints;
         this.strength=strength;
+        this.mana = mana;
     }
 
     /**
@@ -38,7 +39,7 @@ public class Character {
      * @param hitPoints - initial set of hitPoints for our character
      * @param strength - initial strength of our character.
      */
-    public Character(String name, int hitPoints, int strength, Weapon weapon, Ability ability) {
+    public Character(String name, int hitPoints, int strength, int mana, Weapon weapon, Ability ability) {
         numChars++;
         alive = true;
         this.name=name;
@@ -46,6 +47,7 @@ public class Character {
         this.strength=strength;
         this.weapon = weapon;
         this.ability = ability;
+        this.mana = mana;
     }
 
     public int attack() {
