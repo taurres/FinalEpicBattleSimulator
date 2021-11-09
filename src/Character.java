@@ -57,12 +57,12 @@ public class Character {
 
     public int attackWithWeapon() {
         Random random = new Random();
-        return random.nextInt(strength) + weapon.normalAttack();
+        return random.nextInt(strength) + this.weapon.normalAttack();
     }
 
     public int specAttackWithWeapon(){
         Random random = new Random();
-        return random.nextInt(strength) + weapon.specialAttack();
+        return random.nextInt(strength) + this.weapon.specialAttack();
     }
 
     public void AttackWithAbility(){
