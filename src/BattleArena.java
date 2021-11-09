@@ -39,14 +39,14 @@ public class BattleArena
         System.out.println("Choose a weapon for your hero: " + "\n" 
         +"A.Melee:knuckles"+ "\n"+"B.Ranged:clockwork bow"+ "\n"+"C.Magic:fireball"+"\n");
         String selectedWeapon = sc.nextLine(); 
-        if(selectedWeapon=="A") {
+        if(selectedWeapon.equals("A")) {
         	//TODO How to set Weapon?
         	theHero.setWeapon(knuckles);
         }
-        else if(selectedWeapon=="B") {
+        else if(selectedWeapon.equals("B")) {
         	theHero.setWeapon(bow);
         }
-        else if(selectedWeapon=="C") {
+        else if(selectedWeapon.equals("C")) {
         	theHero.setWeapon(fireBall);
         }
         
@@ -57,17 +57,17 @@ public class BattleArena
             System.out.println("It's your turn!"+ "\n"+"Select: A.attack B.attack with equipped weapon C.special attack with weapon D.ability");
             String selectedAttack = sc1.nextLine(); 
 
-            if(selectedAttack=="A") {
+            if(selectedAttack.equals("A")) {
             	//TODO create weapon examples in driver(?)
                 damage = theHero.attack();
             }
-            else if(selectedAttack=="B") {
+            else if(selectedAttack.equals("B")){
             	damage = theHero.attackWithWeapon();
             }
-            else if(selectedAttack=="C") {
+            else if(selectedAttack.equals("C")) {
             	damage = theHero.specAttackWithWeapon();
             }
-            else if(selectedAttack=="D") {
+            else if(selectedAttack.equals("D")) {
             	theHero.AttackWithAbility();
             }
             
