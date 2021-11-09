@@ -1,18 +1,4 @@
-/**
- * Battle Arena
- * Goals: Demonstrate how class can be within one file;
- * explore toString() overrides; show last ICE's solution;
- * further discuss the concept of objects
- * Demonstrate the TODO tag
- * To generate the to do list go to : Window -> Show View -> Tasks
- *
- * Author : Dr. G
- * Date : 5/13/21
- */
-
-
-
-
+import java.util.ArrayList;
 import java.util.Random;
 
 //Game driver
@@ -21,33 +7,40 @@ public class GameBattleDriver
 {
     public static void main(String [] args)
     {
+        Character hero1 = new Character("Random rookie", 10, 10);
+        Character hero2 = new Character("Mysterious transfer student ", 20, 15);
+        Character hero3 = new Character("Elf prince",15,50);
+        
+        Character badguy1 = new Character("Zombie Kiki", 10, 30);
+        Character badguy2 = new Character("Slime Coco", 30, 10);
+        Character badguy3 = new Character("Goblin Hehe", 30, 30);
+        
+      
 
-        Character hero = new Character("Sparhawk", 40, 10);
-        //System.out.println(Character.numChars);
+        // creating an ArrayList for heros
+        ArrayList heros = new ArrayList();  
+        heros.add(hero1);
+        heros.add(hero2);
+        heros.add(hero3);
+     // creating an ArrayList for badguys
+        ArrayList badguys = new ArrayList();
+        badguys.add(badguy1);
+        badguys.add(badguy2);
+        badguys.add(badguy3);
+        
 
-        Character badguy = new Character("Gwerg", 100, 3);
-        //System.out.println(Character.numChars);
+        Random rand1 = new Random();
+        int index1 = rand1.nextInt(3);
+        Character theHero = (Character) heros.get(index1);
+        
+        Random rand2 = new Random();
+        int index2 = rand1.nextInt(3);
+        Character theBadGuy = (Character) badguys.get(index2);
 
-        Character hero2 = new Character("Sparhawk", 40, 10);
-        //System.out.println(Character.numChars);
-
-        //BattleArena b1 = new BattleArena(hero, badguy);
-        //b1.fight();
-
-        BattleArena.fight(hero, badguy);
-
-        //System.out.println(hero.attack());
-        //System.out.println(hero.attack(45));
-
-        //System.out.println(hero);
-        //System.out.println(hero.toString());
-
-        /*TODO Create a weapon and "give it" to the hero to use*/
-        /*TODO Add some print statements to print the weapon that was given to the hero*/
+        BattleArena.fight(theHero, theBadGuy);
 
     }
 }
-
 
 
 
