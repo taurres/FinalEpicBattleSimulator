@@ -4,7 +4,11 @@
  */
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 
 public class BattleArena
 {  
@@ -31,17 +35,31 @@ public class BattleArena
  
         int damage = 0;
         //Redesign the weapons later.
-        Melee knuckles = new Melee("diamond knuckles",10,5);
-        Ranged bow = new Ranged("clockwork bow",4,8);
+        Melee knuckles = new Melee("diamond knuckles",3,40);
+        Ranged bow = new Ranged("clockwork bow",4,60);
         Magic fireBall = new Magic("fireball",6,99);
-        
+
         Scanner sc = new Scanner(System.in); 
         System.out.println("Choose a weapon for your hero: " + "\n" 
         +"A.Melee:knuckles"+ "\n"+"B.Ranged:clockwork bow"+ "\n"+"C.Magic:fireball"+"\n");
-        String selectedWeapon = sc.nextLine(); 
+        String selectedWeapon = sc.nextLine();
+
+        // Check if input is in [A,B,C].
+        if (selectedWeapon.length() == 1 && java.lang.Character.isLetter(selectedWeapon.charAt(0))) {
+            selectedWeapon = selectedWeapon.toUpperCase();
+        }else {
+            throw new RuntimeException("Input should be A or B or C.");
+        }
+
+        List<String> weaponOptionPool = Stream.of("A","B","C").collect(Collectors.toList());
+        if (!weaponOptionPool.contains(selectedWeapon)) {
+            throw new RuntimeException("Input should be A or B or C.");
+        }
+
         if(selectedWeapon.equals("A")) {
         	//TODO How to set Weapon?
         	theHero.setWeapon(knuckles);
+
         }
         else if(selectedWeapon.equals("B")) {
         	theHero.setWeapon(bow);
@@ -49,13 +67,26 @@ public class BattleArena
         else if(selectedWeapon.equals("C")) {
         	theHero.setWeapon(fireBall);
         }
-        
+
+        System.out.println("Weapon: "+theHero.getWeapon());
         //Main game loop
         while(theHero.isAlive() && theBadGuy.isAlive())
         {
         	Scanner sc1 = new Scanner(System.in); 
             System.out.println("It's your turn!"+ "\n"+"Select: A.attack B.attack with equipped weapon C.special attack with weapon D.ability");
-            String selectedAttack = sc1.nextLine(); 
+            String selectedAttack = sc1.nextLine();
+
+            // Check if input is in [A,B,C,D].
+            if (selectedAttack.length() == 1 && java.lang.Character.isLetter(selectedAttack.charAt(0))) {
+                selectedAttack = selectedAttack.toUpperCase();
+            }else {
+                throw new RuntimeException("Input should be A or B or C or D.");
+            }
+
+            List<String> attackOptionPool = Stream.of("A","B","C","D").collect(Collectors.toList());
+            if (!attackOptionPool.contains(selectedAttack)) {
+                throw new RuntimeException("Input should be A or B or C or D.");
+            }
 
             if(selectedAttack.equals("A")) {
             	//TODO create weapon examples in driver(?)

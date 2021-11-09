@@ -11,9 +11,9 @@ public class GameBattleDriver
         Character hero2 = new Character("Mysterious transfer student ", 20, 15, 10);
         Character hero3 = new Character("Elf prince",15,50, 5);
         
-        Character badguy1 = new Character("Zombie Kiki", 10, 30, 20);
-        Character badguy2 = new Character("Slime Coco", 30, 10, 10);
-        Character badguy3 = new Character("Goblin Hehe", 30, 30, 5);
+        Character badguy1 = new Character("Zombie Kiki", 30, 30, 20);
+        Character badguy2 = new Character("Slime Coco", 60, 10, 10);
+        Character badguy3 = new Character("Goblin Hehe", 90, 30, 5);
         
       
 
@@ -39,6 +39,11 @@ public class GameBattleDriver
 
         BattleArena.fight(theHero, theBadGuy);
 
+        /*
+        Character m1 = new Character("m",100,50,60);
+        Weapon sword = new Melee("Sword",100,20);
+        System.out.println(sword.specialAttack());
+        */
     }
 }
 
