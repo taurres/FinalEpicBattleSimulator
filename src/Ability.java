@@ -24,6 +24,14 @@ public abstract class Ability {
      * @throws RuntimeException when ability execution failed
      */
     public abstract void executeAbility();
+
+    /**
+     * Get the durability of an ability.
+     * @return The durability of an ability.
+     */
+    public int getDurability() {
+        return this.durability;
+    }
 }
 
 /**

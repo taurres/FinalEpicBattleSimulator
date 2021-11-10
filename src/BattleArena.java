@@ -2,8 +2,6 @@
  Battle Arena class object
  Facilitates an epic battle between two character class objects
  */
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -99,7 +97,7 @@ public class BattleArena
             	damage = theHero.specAttackWithWeapon();
             }
             else if(selectedAttack.equals("D")) {
-            	theHero.AttackWithAbility();
+            	theHero.useAbility();
             }
             
             System.out.println(theHero.getName() + " hits " + theBadGuy.getName() + " for " + damage);
@@ -129,8 +127,7 @@ public class BattleArena
         //Report the winner
         if (theHero.isAlive())
             System.out.println(theHero.getName());
-        else
-        if (theBadGuy.isAlive())
+        else if (theBadGuy.isAlive())
             System.out.println(theBadGuy.getName());
     }
 

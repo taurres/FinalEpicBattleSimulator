@@ -15,6 +15,7 @@ public class Character {
     private int mana;
     public static int numChars = 0;
 
+
     /**
      * Construct a character object
      * Initializing all variables other than alive, Weapon, Ability
@@ -65,8 +66,15 @@ public class Character {
         return random.nextInt(strength) + this.weapon.specialAttack();
     }
 
-    public void AttackWithAbility(){
-        this.ability.executeAbility();
+    public void useAbility() {
+        if (this.ability == null) {
+            System.out.println("There is no ability to use!");
+        } else {
+            this.ability.executeAbility();
+            if (this.ability.getDurability() == 0) {
+                this.ability = null;
+            }
+        }
     }
 
     public void speakRandomPhrases(){
@@ -125,7 +133,10 @@ public class Character {
     public void setHitPoints(int hitPoints) {
         if (hitPoints <=0) {
             this.hitPoints = 0;
-            alive = false;
+            this.alive = false;
+            if (this.ability != null && this.ability.getClass().equals(Reborn.class)) {
+                useAbility();
+            }
         } else {
             this.hitPoints=hitPoints;
         }
