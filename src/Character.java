@@ -51,21 +51,36 @@ public class Character {
         this.mana = mana;
     }
 
+    /**
+     * This is the normal attack method
+     * @return the normal attack damage
+     */
     public int attack() {
         Random random = new Random();
         return random.nextInt(strength);
     }
 
+    /**
+     * This is the attack with weapon method
+     * @return the attack with weapon damage
+     */
     public int attackWithWeapon() {
         Random random = new Random();
         return random.nextInt(strength) + this.weapon.normalAttack();
     }
 
+    /**
+     * This is the special attack with weapon method
+     * @return the special attack with weapon damage
+     */
     public int specAttackWithWeapon(){
         Random random = new Random();
         return random.nextInt(strength) + this.weapon.specialAttack();
     }
 
+    /**
+     * This is the method to use ability
+     */
     public void useAbility() {
         if (this.ability == null) {
             System.out.println("There is no ability to use!");
@@ -77,6 +92,9 @@ public class Character {
         }
     }
 
+    /**
+     * This is the method to speak random phrases
+     */
     public void speakRandomPhrases(){
         Random random = new Random();
         int index = random.nextInt(3)+1;
@@ -87,6 +105,10 @@ public class Character {
         }
     }
 
+    /**
+     * This is the method to take damage
+     * Hit points will minuse the damage
+     */
     public void takeDamage(int damage) {
         setHitPoints(hitPoints - damage);
     }
@@ -107,13 +129,39 @@ public class Character {
                 + "\nis alive : " + alive + "\nWeapon : " + weapon;
     }
 
-    //getters and setters
+    /**
+     * The getter for name
+     * @return the name
+     */
     public String getName(){return name;}
+
+    /**
+     * The getter for hit points
+     * @return the hit points
+     */
     public int getHitPoints(){return hitPoints;}
+
+    /**
+     * The getter for strength
+     * @return the strength
+     */
     public int getStrength(){return strength;}
+
+    /**
+     * The getter for weapon
+     * @return the weapon
+     */
     public Weapon getWeapon(){return weapon;}
+
+    /**
+     * The getter for mana
+     * @return the mana
+     */
     public int getMana(){return mana;}
 
+    /**
+     * The setter for weapon
+     */
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
         if (weapon instanceof Magic) {
@@ -121,9 +169,15 @@ public class Character {
         }
     }
 
+    /**
+     * The setter for name
+     */
     public void setAlive(boolean alive) {this.alive = alive;}
-    public void setAbility(Ability ability){this.ability = ability;}
 
+    /**
+     * The setter for ability
+     */
+    public void setAbility(Ability ability){this.ability = ability;}
 
     /**
      * Basic setter for hitPoints
