@@ -97,6 +97,16 @@ public class BattleArena
             	damage = theHero.specAttackWithWeapon();
             }
             else if(selectedAttack.equals("D")) {
+                System.out.println("Choose an ability to your hero!");
+                System.out.println("1. Reborn gives you a second chance. Unless you don't need it :D");
+                System.out.println("2. Refresh gives you a huge amount of hit points and mana.");
+                String selectedAbility = sc1.nextLine();
+                if (selectedAbility.equals("1")) {
+                    new Reborn(theHero);
+                }
+                else if (selectedAbility.equals("2")) {
+                    new Refresh(theHero);
+                }
             	theHero.useAbility();
             }
             

@@ -52,10 +52,10 @@ class Reborn extends Ability {
     public void executeAbility() {
         try {
             reborn();
-            System.out.println("Execute Ability Reborn successfully");
+            System.out.println("Execute Ability Reborn successfully! I am back to life again!");
         } catch (Exception e) {
             System.out.println("Execute Ability Reborn failed!");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -143,6 +143,6 @@ class Refresh extends Ability {
 
     @Override
     public String toString() {
-        return "Refresh gives you a huge amount of hit points and mana.";
+        return "set";
     }
 }
