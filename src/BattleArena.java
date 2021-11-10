@@ -2,7 +2,9 @@
  Battle Arena class object
  Facilitates an epic battle between two character class objects
  */
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -10,14 +12,77 @@ import java.util.stream.Stream;
 
 public class BattleArena
 {  
+	private static List<Character> heroList = new ArrayList<Character>();
+	private static List<Character> badGuyList = new ArrayList<Character>();
+	//private static List<Weapon> weaponRack = new ArrayList<Weapon>();
+	private static int round = 0;
+	private static  int index1;
+	private static  int index2;
     private Character theHero;
 	private Character theBadGuy;
 
-	public BattleArena(Character theHero, Character theBadGuy)
-    {
-        this.theHero=theHero;
-        this.theBadGuy=theBadGuy;
-    }
+	//public BattleArena(Character theHero, Character theBadGuy)
+    //{
+        //this.theHero=theHero;
+        //this.theBadGuy=theBadGuy;
+    //}
+	
+	 
+     
+   
+public static void start() {
+	
+	Character hero1 = new Character("Random rookie", 10, 10, 20);
+    Character hero2 = new Character("Mysterious transfer student ", 20, 15, 10);
+    Character hero3 = new Character("Elf prince",15,50, 5);
+    
+    Character badguy1 = new Character("Zombie Kiki", 30, 30, 20);
+    Character badguy2 = new Character("Slime Coco", 60, 10, 10);
+    Character badguy3 = new Character("Goblin Hehe", 90, 30, 5);
+      
+ // creating an ArrayList for heros
+
+    heroList.add(hero1);
+    heroList.add(hero2);
+    heroList.add(hero3);
+ // creating an ArrayList for badguys
+
+    badGuyList.add(badguy1);
+    badGuyList.add(badguy2);
+    badGuyList.add(badguy3);
+    
+
+    
+    
+ // Repeat this process until all the bad guys or all of the heroes are defeated.
+ 		while (heroList.size() > 0 && badGuyList.size() > 0) {
+ 			round++;
+ 			//weaponRack.clear();
+ 			Random rand1 = new Random();
+ 			int index1 = rand1.nextInt(heroList.size());
+ 			Character theHero = (Character) heroList.get(index1);
+ 			
+ 			
+ 			 Random rand2 = new Random();
+ 			int index2 =  rand2.nextInt(badGuyList.size());
+ 			Character theBadGuy = (Character) badGuyList.get(index2);
+ 			
+ 			
+ // call the fight method and passed in the selected hero and bad guy to start a battle
+ 			System.out.println("-------\nRound " + round + "! \n-------");
+ 			fight(theHero, theBadGuy);
+ 		}
+
+ 		if (heroList.isEmpty()) {
+ 			System.out.println("\nGame Over...\nThe Bad Guy Wins");
+ 		} else if (badGuyList.isEmpty()){
+ 			System.out.println("\nGame Over!\n The Hero Wins!");
+ 		}
+ 	}
+    
+
+     
+
 
     /**
      * Epic battle between two characters
@@ -87,7 +152,7 @@ public class BattleArena
             }
 
             if(selectedAttack.equals("A")) {
-            	//TODO create weapon examples in driver(?)
+            	
                 damage = theHero.attack();
             }
             else if(selectedAttack.equals("B")){
@@ -113,10 +178,10 @@ public class BattleArena
             System.out.println(theHero.getName() + " hits " + theBadGuy.getName() + " for " + damage);
             theBadGuy.takeDamage(damage);
 
-            //Pause for 2 seconds to add some suspense
+            //Pause for 1 seconds to add some suspense
             //This is an example of a checked exception. It won't work without it...
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -125,6 +190,7 @@ public class BattleArena
             if (theBadGuy.isAlive())
             {
             	//TODO Need to revise the random phrases method.
+            	System.out.println(theBadGuy.getName() + " :  " );
             	theBadGuy.speakRandomPhrases();
                 damage = theBadGuy.attack();
                 System.out.println(theBadGuy.getName() + " hits " + theHero.getName() + " for " + damage);
@@ -132,13 +198,16 @@ public class BattleArena
             }
         }
 
-        System.out.print("Our winner is : " );
+
 
         //Report the winner
-        if (theHero.isAlive())
-            System.out.println(theHero.getName());
-        else if (theBadGuy.isAlive())
-            System.out.println(theBadGuy.getName());
+        if (theHero.isAlive()) {
+        	System.out.println(theBadGuy.getName() + " Died. " + theHero.getName() + " Wins!!");
+		badGuyList.remove(theBadGuy);}
+            
+        else if (theBadGuy.isAlive()) {
+            System.out.println(theHero.getName() + " Died. " + theBadGuy.getName() + " Wins!!");
+            heroList.remove(theHero);}
     }
 
 }
