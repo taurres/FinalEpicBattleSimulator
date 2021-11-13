@@ -107,7 +107,7 @@ public class Character {
 
     /**
      * This is the method to take damage
-     * Hit points will minuse the damage
+     * Hit points will minus the damage
      */
     public void takeDamage(int damage) {
         setHitPoints(hitPoints - damage);
@@ -207,5 +207,9 @@ public class Character {
         } else {
             this.mana = mana;
         }
+    }
+
+    public void reportStatus() {
+        System.out.println( this.getName() + " has HitPoints:"+ this.getHitPoints() + "  Mana:"+ this.getMana());
     }
 }
