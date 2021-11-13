@@ -95,12 +95,12 @@ class Refresh extends Ability {
     /**
      * Hit points amount to be added.
      */
-    private final int ADD_HIT_POINTS = 1000;
+    private final int ADD_HIT_POINTS = 30;
 
     /**
      * Mana amount to be added.
      */
-    private final int ADD_MANA = 500;
+    private final int ADD_MANA = 30;
 
     /**
      * Constructor for Refresh ability

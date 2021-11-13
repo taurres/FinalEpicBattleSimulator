@@ -120,7 +120,6 @@ public static void start() {
         }
 
         if(selectedWeapon.equals("A")) {
-        	//TODO How to set Weapon?
         	theHero.setWeapon(knuckles);
 
         }
@@ -135,6 +134,9 @@ public static void start() {
         //Main game loop
         while(theHero.isAlive() && theBadGuy.isAlive())
         {
+            theHero.reportStatus();
+            theBadGuy.reportStatus();
+
         	Scanner sc1 = new Scanner(System.in); 
             System.out.println("It's your turn!"+ "\n"+"Select: A.attack B.attack with equipped weapon C.special attack with weapon D.ability");
             String selectedAttack = sc1.nextLine();
@@ -166,6 +168,12 @@ public static void start() {
                 System.out.println("1. Reborn gives you a second chance. Unless you don't need it :D");
                 System.out.println("2. Refresh gives you a huge amount of hit points and mana.");
                 String selectedAbility = sc1.nextLine();
+
+                List<String> abilityOptionPool = Stream.of("1","2").collect(Collectors.toList());
+                if (!abilityOptionPool.contains(selectedAbility)) {
+                    throw new RuntimeException("Input should be 1 or 2.");
+                }
+
                 if (selectedAbility.equals("1")) {
                     new Reborn(theHero);
                 }

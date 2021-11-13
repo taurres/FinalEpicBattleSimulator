@@ -197,7 +197,6 @@ class Magic extends Weapon {
         this.owner = p;
     }
 
-    //TODO: Need to setup mana in Character first, including getMana() and setMana().
 
     /**
      * Helper method that could get the owner's mana.
