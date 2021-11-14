@@ -1,6 +1,7 @@
 /**
- Battle Arena class object
- Facilitates an epic battle between two character class objects
+ * @author: Jie Chen, Jiaxi Wen, Choi LaiYun, Yilin Zhou
+ * Battle Arena class object
+ * Facilitates an epic battle between two character class objects
  */
 import java.util.*;
 import java.util.function.Consumer;
