@@ -1,9 +1,9 @@
-import java.util.Random;
-
 /**
- * @author: Jie Chen, Jiaxi Wen, Choi LaiYun, Yilin Zhou
+ * @author: Jie Chen, Jiaxi Wen, LaiYun Choi, Yilin Zhou
  * This is the Weanpon class.
  */
+
+import java.util.Random;
 
 public abstract class Weapon {
     private String name;
@@ -14,8 +14,8 @@ public abstract class Weapon {
     /**
      * Abstract weapon constructor.
      *
-     * @param name name of the weapon.
-     * @param strength strength of the weapon.
+     * @param name       name of the weapon.
+     * @param strength   strength of the weapon.
      * @param durability durability of the weapon.
      */
     public Weapon(String name, int strength, int durability) {
@@ -33,12 +33,14 @@ public abstract class Weapon {
 
     /**
      * Weapon's special attack method
+     *
      * @return special damage created.
      */
     public abstract int specialAttack();
 
     /**
      * Getter of durability.
+     *
      * @return weapon's durability.
      */
     public int getDurability() {
@@ -47,6 +49,7 @@ public abstract class Weapon {
 
     /**
      * Getter of strength.
+     *
      * @return weapon's strength.
      */
     public int getStrength() {
@@ -55,6 +58,7 @@ public abstract class Weapon {
 
     /**
      * Reduce the durability.
+     *
      * @param cost the amount of durability to be deducted.
      */
     public void reduceDurability(double cost) {
@@ -63,6 +67,7 @@ public abstract class Weapon {
 
     /**
      * toString() method of the weapon.
+     *
      * @return information of the weapon.
      */
     @Override
@@ -79,8 +84,8 @@ class Melee extends Weapon {
     /**
      * Melee constructor.
      *
-     * @param name name of Melee.
-     * @param strength strength of Melee.
+     * @param name       name of Melee.
+     * @param strength   strength of Melee.
      * @param durability durability of Melee.
      */
     public Melee(String name, int strength, int durability) {
@@ -130,8 +135,8 @@ class Ranged extends Weapon {
     /**
      * Ranged constructor.
      *
-     * @param name name of Ranged.
-     * @param strength strength of Ranged.
+     * @param name       name of Ranged.
+     * @param strength   strength of Ranged.
      * @param durability durability of Ranged.
      */
     public Ranged(String name, int strength, int durability) {
@@ -184,8 +189,8 @@ class Magic extends Weapon {
     /**
      * Magic constructor.
      *
-     * @param name name of Magic.
-     * @param strength strength of Magic.
+     * @param name       name of Magic.
+     * @param strength   strength of Magic.
      * @param durability durability of Magic.
      */
     public Magic(String name, int strength, int durability) {
