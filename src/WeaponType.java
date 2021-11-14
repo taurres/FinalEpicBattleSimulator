@@ -1,4 +1,4 @@
-/*
+/**
  * @author: Jie Chen, Jiaxi Wen, Choi LaiYun, Yilin Zhou
  * This is the WeaponType enum.
  */
