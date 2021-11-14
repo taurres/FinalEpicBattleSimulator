@@ -1,6 +1,7 @@
 import java.util.Random;
 
 /**
+ * @author: Jie Chen, Jiaxi Wen, Choi LaiYun, Yilin Zhou
  * We creatively add an Ability element to the hero Character.
  * Player can select an Ability for the character each round.
  */
