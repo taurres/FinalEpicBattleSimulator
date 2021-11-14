@@ -4,7 +4,6 @@
  * Generic RPG Character
  */
 
-import java.util.List;
 import java.util.Random;
 
 public class Character {
