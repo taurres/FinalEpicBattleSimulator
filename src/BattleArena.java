@@ -156,11 +156,11 @@ public static void start() {
                             Map<String, Runnable> abilityOptionPool = new HashMap<>();
                             abilityOptionPool.put("1", () -> new Reborn(theHero));
                             abilityOptionPool.put("2", () -> new Refresh(theHero));
-                            if (abilityOptionPool.containsKey(selectedAbility)) {
+                            try {
                                 abilityOptionPool.get(selectedAbility).run();
                                 theHero.useAbility();
                                 break;
-                            } else {
+                            } catch (NullPointerException e) {
                                 System.out.println("Input should be 1 or 2.");
                             }
                         }
