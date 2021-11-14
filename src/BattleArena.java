@@ -2,13 +2,10 @@
  Battle Arena class object
  Facilitates an epic battle between two character class objects
  */
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 
 public class BattleArena
 {  
@@ -26,10 +23,7 @@ public class BattleArena
         //this.theHero=theHero;
         //this.theBadGuy=theBadGuy;
     //}
-	
-	 
-     
-   
+
 public static void start() {
 	
 	Character hero1 = new Character("Random rookie", 10, 10, 20);
@@ -50,10 +44,7 @@ public static void start() {
     badGuyList.add(badguy1);
     badGuyList.add(badguy2);
     badGuyList.add(badguy3);
-    
 
-    
-    
  // Repeat this process until all the bad guys or all of the heroes are defeated.
  		while (heroList.size() > 0 && badGuyList.size() > 0) {
  			round++;
@@ -79,10 +70,6 @@ public static void start() {
  			System.out.println("\nGame Over!\n The Hero Wins!");
  		}
  	}
-    
-
-     
-
 
     /**
      * Epic battle between two characters
@@ -95,96 +82,92 @@ public static void start() {
         System.out.println("The hero " + theHero.toString() + ".\n");
         System.out.println("The bad guy " + theBadGuy.toString() + ".\n");
         System.out.println("Let the battle begin...");
- 
+
         int damage = 0;
         //Redesign the weapons later.
         Melee knuckles = new Melee("diamond knuckles",3,40);
         Ranged bow = new Ranged("clockwork bow",4,60);
         Magic fireBall = new Magic("fireball",6,99);
 
-        Scanner sc = new Scanner(System.in); 
-        System.out.println("Choose a weapon for your hero: " + "\n" 
-        +"A.Melee:knuckles"+ "\n"+"B.Ranged:clockwork bow"+ "\n"+"C.Magic:fireball"+"\n");
-        String selectedWeapon = sc.nextLine();
+        //Initialize scanner
+        Scanner sc1 = new Scanner(System.in);
 
-        // Check if input is in [A,B,C].
-        if (selectedWeapon.length() == 1 && java.lang.Character.isLetter(selectedWeapon.charAt(0))) {
+        //Select weapon
+        while (true) {
+            System.out.println("Choose a weapon for your hero: " + "\n"
+                    + "A.Melee:knuckles" + "\n" + "B.Ranged:clockwork bow" + "\n" + "C.Magic:fireball" + "\n");
+            String selectedWeapon = sc1.nextLine();
+
+            // Check if input is in [A,B,C].
+            List<String> weaponOptionPool = Stream.of("A", "B", "C", "a", "b", "c").collect(Collectors.toList());
+            if (!weaponOptionPool.contains(selectedWeapon)) {
+                System.out.println("Input should be A or B or C.");
+                continue;
+            }
             selectedWeapon = selectedWeapon.toUpperCase();
-        }else {
-            throw new RuntimeException("Input should be A or B or C.");
-        }
 
-        List<String> weaponOptionPool = Stream.of("A","B","C").collect(Collectors.toList());
-        if (!weaponOptionPool.contains(selectedWeapon)) {
-            throw new RuntimeException("Input should be A or B or C.");
-        }
-
-        if(selectedWeapon.equals("A")) {
-        	theHero.setWeapon(knuckles);
-
-        }
-        else if(selectedWeapon.equals("B")) {
-        	theHero.setWeapon(bow);
-        }
-        else if(selectedWeapon.equals("C")) {
-        	theHero.setWeapon(fireBall);
+            switch (selectedWeapon) {
+                case "A" -> theHero.setWeapon(knuckles);
+                case "B" -> theHero.setWeapon(bow);
+                case "C" -> theHero.setWeapon(fireBall);
+            }
+            break;
         }
 
         System.out.println("Weapon: "+theHero.getWeapon());
         //Main game loop
-        while(theHero.isAlive() && theBadGuy.isAlive())
-        {
+        while(theHero.isAlive() && theBadGuy.isAlive()) {
             theHero.reportStatus();
             theBadGuy.reportStatus();
-
-        	Scanner sc1 = new Scanner(System.in); 
-            System.out.println("It's your turn!"+ "\n"+"Select: A.attack B.attack with equipped weapon C.special attack with weapon D.ability");
-            String selectedAttack = sc1.nextLine();
-
-            // Check if input is in [A,B,C,D].
-            if (selectedAttack.length() == 1 && java.lang.Character.isLetter(selectedAttack.charAt(0))) {
+            while (true) {
+                System.out.println("It's your turn!" + "\n" + "Select: A.attack B.attack with equipped weapon C.special attack with weapon D.ability");
+                String selectedAttack = sc1.nextLine();
+                List<String> attackOptionPool = Stream.of("A", "B", "C", "D", "a", "b", "c", "d").collect(Collectors.toList());
+                if (!attackOptionPool.contains(selectedAttack)) {
+                    System.out.println("Input should be A or B or C or D.");
+                    continue;
+                }
                 selectedAttack = selectedAttack.toUpperCase();
-            }else {
-                throw new RuntimeException("Input should be A or B or C or D.");
-            }
 
-            List<String> attackOptionPool = Stream.of("A","B","C","D").collect(Collectors.toList());
-            if (!attackOptionPool.contains(selectedAttack)) {
-                throw new RuntimeException("Input should be A or B or C or D.");
-            }
+                switch (selectedAttack) {
+                    case "A":
+                        damage = theHero.attack();
+                        System.out.println(theHero.getName() + " hits " + theBadGuy.getName() + " for " + damage);
+                        theBadGuy.takeDamage(damage);
+                        break;
+                    case "B":
+                        damage = theHero.attackWithWeapon();
+                        System.out.println(theHero.getName() + " hits " + theBadGuy.getName() + " for " + damage);
+                        theBadGuy.takeDamage(damage);
+                        break;
+                    case "C":
+                        damage = theHero.specAttackWithWeapon();
+                        System.out.println(theHero.getName() + " hits " + theBadGuy.getName() + " for " + damage);
+                        theBadGuy.takeDamage(damage);
+                        break;
+                    case "D":
+                        while (true) {
+                            System.out.println("Choose an ability to your hero!");
+                            System.out.println("1. Reborn gives you a second chance. Unless you don't need it :D");
+                            System.out.println("2. Refresh gives you a huge amount of hit points and mana.");
 
-            if(selectedAttack.equals("A")) {
-            	
-                damage = theHero.attack();
-            }
-            else if(selectedAttack.equals("B")){
-            	damage = theHero.attackWithWeapon();
-            }
-            else if(selectedAttack.equals("C")) {
-            	damage = theHero.specAttackWithWeapon();
-            }
-            else if(selectedAttack.equals("D")) {
-                System.out.println("Choose an ability to your hero!");
-                System.out.println("1. Reborn gives you a second chance. Unless you don't need it :D");
-                System.out.println("2. Refresh gives you a huge amount of hit points and mana.");
-                String selectedAbility = sc1.nextLine();
+                            String selectedAbility = sc1.nextLine();
 
-                List<String> abilityOptionPool = Stream.of("1","2").collect(Collectors.toList());
-                if (!abilityOptionPool.contains(selectedAbility)) {
-                    throw new RuntimeException("Input should be 1 or 2.");
+                            Map<String, Runnable> abilityOptionPool = new HashMap<>();
+                            abilityOptionPool.put("1", () -> new Reborn(theHero));
+                            abilityOptionPool.put("2", () -> new Refresh(theHero));
+                            if (abilityOptionPool.containsKey(selectedAbility)) {
+                                abilityOptionPool.get(selectedAbility).run();
+                                theHero.useAbility();
+                                break;
+                            } else {
+                                System.out.println("Input should be 1 or 2.");
+                            }
+                        }
+                        break;
                 }
-
-                if (selectedAbility.equals("1")) {
-                    new Reborn(theHero);
-                }
-                else if (selectedAbility.equals("2")) {
-                    new Refresh(theHero);
-                }
-            	theHero.useAbility();
+                break;
             }
-            
-            System.out.println(theHero.getName() + " hits " + theBadGuy.getName() + " for " + damage);
-            theBadGuy.takeDamage(damage);
 
             //Pause for 1 seconds to add some suspense
             //This is an example of a checked exception. It won't work without it...
@@ -195,8 +178,7 @@ public static void start() {
             }
 
             //Don't do damage if 2nd combatant was killed
-            if (theBadGuy.isAlive())
-            {
+            if (theBadGuy.isAlive()) {
             	//TODO Need to revise the random phrases method.
             	System.out.println(theBadGuy.getName() + " :  " );
             	theBadGuy.speakRandomPhrases();
@@ -205,8 +187,6 @@ public static void start() {
                 theHero.takeDamage(damage);
             }
         }
-
-
 
         //Report the winner
         if (theHero.isAlive()) {
