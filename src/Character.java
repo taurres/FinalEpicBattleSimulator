@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * @author: Jie Chen, Jiaxi Wen, Choi LaiYun, Yilin Zhou
  * Character class
  * Generic RPG Character
  */
