@@ -107,10 +107,13 @@ public class Character {
         switch (index) {
             case 1:
                 System.out.println("You are a bad guy");
+                break;
             case 2:
                 System.out.println("Oops!");
+                break;
             case 3:
                 System.out.println("I will kill you!");
+                break;
         }
     }
 
