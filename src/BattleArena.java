@@ -1,83 +1,82 @@
 /**
- * @author: Jie Chen, Jiaxi Wen, Choi LaiYun, Yilin Zhou
+ * @author: Jie Chen, Jiaxi Wen, LaiYun Choi, Yilin Zhou
  * Battle Arena class object
  * Facilitates an epic battle between two character class objects
  */
+
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class BattleArena
-{  
-	private static List<Character> heroList = new ArrayList<Character>();
-	private static List<Character> badGuyList = new ArrayList<Character>();
-	//private static List<Weapon> weaponRack = new ArrayList<Weapon>();
-	private static int round = 0;
-	private static  int index1;
-	private static  int index2;
+public class BattleArena {
+    private static List<Character> heroList = new ArrayList<Character>();
+    private static List<Character> badGuyList = new ArrayList<Character>();
+    //private static List<Weapon> weaponRack = new ArrayList<Weapon>();
+    private static int round = 0;
+    private static int index1;
+    private static int index2;
     private Character theHero;
-	private Character theBadGuy;
+    private Character theBadGuy;
 
-	//public BattleArena(Character theHero, Character theBadGuy)
+    //public BattleArena(Character theHero, Character theBadGuy)
     //{
-        //this.theHero=theHero;
-        //this.theBadGuy=theBadGuy;
+    //this.theHero=theHero;
+    //this.theBadGuy=theBadGuy;
     //}
 
-public static void start() {
-	
-	Character hero1 = new Character("Random rookie", 10, 10, 20);
-    Character hero2 = new Character("Mysterious transfer student ", 20, 15, 10);
-    Character hero3 = new Character("Elf prince",15,50, 5);
-    
-    Character badguy1 = new Character("Zombie Kiki", 30, 30, 20);
-    Character badguy2 = new Character("Slime Coco", 60, 10, 10);
-    Character badguy3 = new Character("Goblin Hehe", 90, 30, 5);
-      
- // creating an ArrayList for heros
+    public static void start() {
 
-    heroList.add(hero1);
-    heroList.add(hero2);
-    heroList.add(hero3);
- // creating an ArrayList for badguys
+        Character hero1 = new Character("Random rookie", 10, 10, 20);
+        Character hero2 = new Character("Mysterious transfer student ", 20, 15, 10);
+        Character hero3 = new Character("Elf prince", 15, 50, 5);
 
-    badGuyList.add(badguy1);
-    badGuyList.add(badguy2);
-    badGuyList.add(badguy3);
+        Character badguy1 = new Character("Zombie Kiki", 30, 30, 20);
+        Character badguy2 = new Character("Slime Coco", 60, 10, 10);
+        Character badguy3 = new Character("Goblin Hehe", 90, 30, 5);
 
- // Repeat this process until all the bad guys or all of the heroes are defeated.
- 		while (heroList.size() > 0 && badGuyList.size() > 0) {
- 			round++;
- 			//weaponRack.clear();
- 			Random rand1 = new Random();
- 			int index1 = rand1.nextInt(heroList.size());
- 			Character theHero = (Character) heroList.get(index1);
- 			
- 			
- 			 Random rand2 = new Random();
- 			int index2 =  rand2.nextInt(badGuyList.size());
- 			Character theBadGuy = (Character) badGuyList.get(index2);
- 			
- 			
- // call the fight method and passed in the selected hero and bad guy to start a battle
- 			System.out.println("-------\nRound " + round + "! \n-------");
- 			fight(theHero, theBadGuy);
- 		}
+        // creating an ArrayList for heros
 
- 		if (heroList.isEmpty()) {
- 			System.out.println("\nGame Over...\nThe Bad Guy Wins");
- 		} else if (badGuyList.isEmpty()){
- 			System.out.println("\nGame Over!\n The Hero Wins!");
- 		}
- 	}
+        heroList.add(hero1);
+        heroList.add(hero2);
+        heroList.add(hero3);
+        // creating an ArrayList for badguys
+
+        badGuyList.add(badguy1);
+        badGuyList.add(badguy2);
+        badGuyList.add(badguy3);
+
+        // Repeat this process until all the bad guys or all of the heroes are defeated.
+        while (heroList.size() > 0 && badGuyList.size() > 0) {
+            round++;
+            //weaponRack.clear();
+            Random rand1 = new Random();
+            int index1 = rand1.nextInt(heroList.size());
+            Character theHero = (Character) heroList.get(index1);
+
+
+            Random rand2 = new Random();
+            int index2 = rand2.nextInt(badGuyList.size());
+            Character theBadGuy = (Character) badGuyList.get(index2);
+
+
+            // call the fight method and passed in the selected hero and bad guy to start a battle
+            System.out.println("-------\nRound " + round + "! \n-------");
+            fight(theHero, theBadGuy);
+        }
+
+        if (heroList.isEmpty()) {
+            System.out.println("\nGame Over...\nThe Bad Guy Wins");
+        } else if (badGuyList.isEmpty()) {
+            System.out.println("\nGame Over!\n The Hero Wins!");
+        }
+    }
 
     /**
      * Epic battle between two characters
      * Method internal to class object
      */
-    public static void fight(Character theHero, Character theBadGuy)
-    {
+    public static void fight(Character theHero, Character theBadGuy) {
         System.out.println("Welcome to the Arena!");
         System.out.println("Today " + theHero.getName() + " will battle against " + theBadGuy.getName() + "!\n");
         System.out.println("The hero " + theHero.toString() + ".\n");
@@ -86,9 +85,9 @@ public static void start() {
 
         int damage = 0;
         //Redesign the weapons later.
-        Melee knuckles = new Melee("diamond knuckles",3,40);
-        Ranged bow = new Ranged("clockwork bow",4,60);
-        Magic fireBall = new Magic("fireball",6,99);
+        Melee knuckles = new Melee("diamond knuckles", 3, 40);
+        Ranged bow = new Ranged("clockwork bow", 4, 60);
+        Magic fireBall = new Magic("fireball", 6, 99);
 
         //Initialize scanner
         Scanner sc1 = new Scanner(System.in);
@@ -115,9 +114,9 @@ public static void start() {
             break;
         }
 
-        System.out.println("Weapon: "+theHero.getWeapon());
+        System.out.println("Weapon: " + theHero.getWeapon());
         //Main game loop
-        while(theHero.isAlive() && theBadGuy.isAlive()) {
+        while (theHero.isAlive() && theBadGuy.isAlive()) {
             theHero.reportStatus();
             theBadGuy.reportStatus();
             while (true) {
@@ -180,9 +179,9 @@ public static void start() {
 
             //Don't do damage if 2nd combatant was killed
             if (theBadGuy.isAlive()) {
-            	//TODO Need to revise the random phrases method.
-            	System.out.println(theBadGuy.getName() + " :  " );
-            	theBadGuy.speakRandomPhrases();
+                //TODO Need to revise the random phrases method.
+                System.out.println(theBadGuy.getName() + " :  ");
+                theBadGuy.speakRandomPhrases();
                 damage = theBadGuy.attack();
                 System.out.println(theBadGuy.getName() + " hits " + theHero.getName() + " for " + damage);
                 theHero.takeDamage(damage);
@@ -191,12 +190,12 @@ public static void start() {
 
         //Report the winner
         if (theHero.isAlive()) {
-        	System.out.println(theBadGuy.getName() + " Died. " + theHero.getName() + " Wins!!");
-		badGuyList.remove(theBadGuy);}
-            
-        else if (theBadGuy.isAlive()) {
+            System.out.println(theBadGuy.getName() + " Died. " + theHero.getName() + " Wins!!");
+            badGuyList.remove(theBadGuy);
+        } else if (theBadGuy.isAlive()) {
             System.out.println(theHero.getName() + " Died. " + theBadGuy.getName() + " Wins!!");
-            heroList.remove(theHero);}
+            heroList.remove(theHero);
+        }
     }
 
 }
