@@ -1,5 +1,10 @@
 import java.util.Random;
 
+/**
+ * @author: Jie Chen, Jiaxi Wen, Choi LaiYun, Yilin Zhou
+ * This is the Weanpon class.
+ */
+
 public abstract class Weapon {
     private String name;
     private int strength;
