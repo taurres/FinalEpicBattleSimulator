@@ -28,7 +28,7 @@ public class BattleArena {
     public static void start() {
 
         Character hero1 = new Character("Random rookie", 10, 10, 20);
-        Character hero2 = new Character("Mysterious transfer student ", 20, 15, 10);
+        Character hero2 = new Character("Mysterious transfer student", 20, 15, 10);
         Character hero3 = new Character("Elf prince", 15, 50, 5);
 
         Character badguy1 = new Character("Zombie Kiki", 30, 30, 20);
