@@ -40,7 +40,8 @@ public abstract class Ability {
 }
 
 /**
- * Reborn ability can bring a character back to life if the character is dead,
+ * Reborn ability can bring a character back to life when the character is dead,
+ * If the ability is not used
  * after reborn, the character will have random hit points at the maximum of its Strength.
  */
 class Reborn extends Ability {
@@ -58,9 +59,8 @@ class Reborn extends Ability {
     public void executeAbility() {
         try {
             reborn();
-            System.out.println("Execute Ability Reborn successfully! I am back to life again!");
+            System.out.println(character.getName() + ": Reborn successfully! I am back to life again!");
         } catch (Exception e) {
-            System.out.println("Execute Ability Reborn failed!");
             System.out.println(e.getMessage());
         }
     }
@@ -79,12 +79,11 @@ class Reborn extends Ability {
                 // set hit points based on the character's strength
                 character.setHitPoints(random.nextInt(character.getStrength()));
                 character.setAlive(true);
-                System.out.printf("%s refresh hitpoint to %d\n", character.getName(), character.getHitPoints());
             } else {
-                throw new RuntimeException("Durability is 0.");
+                throw new IllegalArgumentException(character.getName() + ": Can't Reborn. Durability is 0.");
             }
         } else {
-            throw new RuntimeException("Character is still alive!");
+            throw new IllegalStateException(character.getName() + ": I have learned how to Reborn!");
         }
     }
 
@@ -122,9 +121,8 @@ class Refresh extends Ability {
     public void executeAbility() {
         try {
             refresh();
-            System.out.println("Execute Ability Refresh successfully");
+            System.out.println(character.getName() + ": Refresh successfully");
         } catch (Exception e) {
-            System.out.println("Execute Ability Refresh failed!");
             e.printStackTrace();
         }
     }
@@ -143,15 +141,15 @@ class Refresh extends Ability {
                 character.setHitPoints(curHitPoints + ADD_HIT_POINTS);
                 character.setMana(curMana + ADD_MANA);
             } else {
-                throw new RuntimeException("Durability is 0.");
+                throw new IllegalArgumentException(character.getName() + ": Can't Refresh. Durability is 0.");
             }
         } else {
-            throw new RuntimeException("Character is dead!");
+            throw new IllegalStateException(character.getName() + ": Come on, Refresh? I am already dead!");
         }
     }
 
     @Override
     public String toString() {
-        return "set";
+        return "Refresh can add a certain amount to the hit points and mana.";
     }
 }

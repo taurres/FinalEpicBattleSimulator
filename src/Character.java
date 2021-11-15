@@ -215,6 +215,8 @@ public class Character {
      * Basic setter for hitPoints
      * Assigns new value to character hitPoints
      *
+     * If the character has Reborn ability, the character can reborn once when dead.
+     *
      * @param hitPoints - the hit points of the character
      */
     public void setHitPoints(int hitPoints) {

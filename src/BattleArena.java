@@ -170,6 +170,7 @@ public class BattleArena {
                             try {
                                 abilityOptionPool.get(selectedAbility).run();
                                 theHero.useAbility();
+                                theHero.reportStatus();
                                 break;
                             } catch (NullPointerException e) {
                                 System.out.println("Input should be 1 or 2.");
@@ -195,7 +196,10 @@ public class BattleArena {
                 theBadGuy.speakRandomPhrases();
                 damage = theBadGuy.attack();
                 System.out.println(theBadGuy.getName() + " hits " + theHero.getName() + " for " + damage);
+                //the bad guy attack the hero.
                 theHero.takeDamage(damage);
+                //Clean up the ability for this round
+                theHero.setAbility(null);
             }
         }
 
