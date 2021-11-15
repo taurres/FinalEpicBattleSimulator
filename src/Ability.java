@@ -41,7 +41,6 @@ public abstract class Ability {
 
 /**
  * Reborn ability can bring a character back to life when the character is dead,
- * If the ability is not used
  * after reborn, the character will have random hit points at the maximum of its Strength.
  */
 class Reborn extends Ability {
